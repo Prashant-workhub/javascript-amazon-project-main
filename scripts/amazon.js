@@ -72,6 +72,12 @@ document.querySelectorAll(".add-to-cart-button").forEach((button) => {
     if (matchingItem) {
       cart.push({ ID: productID, quant: 1 });
     }
-    console.log(cart);
+    let quantTotal = 0;
+
+    cart.forEach((item) => {
+      quantTotal += item.quant;
+    });
+    // console.log(cart);
+    document.querySelector(".js-cart-quant").innerHTML = quantTotal;
   });
 });
