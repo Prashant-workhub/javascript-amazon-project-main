@@ -3,6 +3,12 @@ import { products } from "../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 
 let carthtml = "";
+
+const today = dayjs();
+const deliverydate1 = today.add(7, "day").format("dddd , MMMM D");
+const deliverydate2 = today.add(3, "day").format("dddd , MMMM D");
+const deliverydate3 = today.add(1, "day").format("dddd , MMMM D");
+
 cart.forEach((cartItem) => {
   const productID = cartItem.ID;
   let matchingProduct;
@@ -16,7 +22,7 @@ cart.forEach((cartItem) => {
   carthtml += `<div class="cart-item-container js-product-delete-${
     matchingProduct.id
   }">
-            <div class="delivery-date">Delivery date: Tuesday, June 21</div>
+            <div class="delivery-date">Delivery date: ${deliverydate1}</div>
 
             <div class="cart-item-details-grid">
               <img
@@ -58,7 +64,7 @@ cart.forEach((cartItem) => {
                     name="delivery-option-${matchingProduct.id}"
                   />
                   <div>
-                    <div class="delivery-option-date">Tuesday, June 21</div>
+                    <div class="delivery-option-date">${deliverydate1}</div>
                     <div class="delivery-option-price">FREE Shipping</div>
                   </div>
                 </div>
@@ -69,7 +75,7 @@ cart.forEach((cartItem) => {
                     name="delivery-option-${matchingProduct.id}"
                   />
                   <div>
-                    <div class="delivery-option-date">Wednesday, June 15</div>
+                    <div class="delivery-option-date">${deliverydate2}</div>
                     <div class="delivery-option-price">$4.99 - Shipping</div>
                   </div>
                 </div>
@@ -80,7 +86,7 @@ cart.forEach((cartItem) => {
                     name="delivery-option-${matchingProduct.id}"
                   />
                   <div>
-                    <div class="delivery-option-date">Monday, June 13</div>
+                    <div class="delivery-option-date">${deliverydate3}</div>
                     <div class="delivery-option-price">$9.99 - Shipping</div>
                   </div>
                 </div>
