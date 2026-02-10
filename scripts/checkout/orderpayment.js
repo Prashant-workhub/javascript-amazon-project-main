@@ -3,7 +3,7 @@ import { products } from "../../data/products.js";
 export function renderPaymentSummary() {}
 
 let priceSummaryHtml = "";
-let matchingProduct;
+let matchingProduct = "";
 let total = 0;
 cart.foreach((Element) => {
   products.forEach((item) => {
