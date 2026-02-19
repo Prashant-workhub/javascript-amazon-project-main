@@ -2,6 +2,7 @@ import { cart, removeProduct, updateDeliveryOption } from "../../data/cart.js";
 import { products } from "../../data/products.js";
 import { formatCurrency } from "../../utils/money.js";
 import { delivery } from "../../utils/deliveryOption.js";
+import { renderPaymentSummary } from "./orderpayment.js";
 
 export function renderCartSummary() {
   let carthtml = "";
@@ -14,8 +15,11 @@ export function renderCartSummary() {
         matchingProduct = product;
       } else return;
     });
+    if (!matchingProduct) {
+      return;
+    }
 
-    let mathingIdProduct = [];
+    let mathingIdProduct = delivery[0];
     delivery.forEach((item) => {
       if (cartItem.deliveryOptionId === item.id) {
         mathingIdProduct = item;
@@ -112,6 +116,7 @@ export function renderCartSummary() {
       removeProduct(productID);
       let container = document.querySelector(`.js-product-delete-${productID}`);
       container.remove();
+      renderPaymentSummary();
     });
   });
 
@@ -124,6 +129,7 @@ export function renderCartSummary() {
 
       updateDeliveryOption(productID, productOption);
       renderCartSummary();
+      renderPaymentSummary();
     });
   });
 }

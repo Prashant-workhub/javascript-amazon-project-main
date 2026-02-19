@@ -1,5 +1,21 @@
-export let cart = JSON.parse(localStorage.getItem("Lcart"));
-if (!cart) {
+const savedCart = JSON.parse(localStorage.getItem("Lcart"));
+
+function normalizeCart(rawCart) {
+  if (!Array.isArray(rawCart)) {
+    return null;
+  }
+
+  return rawCart
+    .map((item) => ({
+      ID: item.ID || item.productId,
+      quant: Number(item.quant ?? item.quantity ?? 1),
+      deliveryOptionId: String(item.deliveryOptionId || "1"),
+    }))
+    .filter((item) => item.ID && Number.isFinite(item.quant) && item.quant > 0);
+}
+
+export let cart = normalizeCart(savedCart);
+if (!cart || cart.length === 0) {
   cart = [
     {
       ID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -18,6 +34,7 @@ if (!cart) {
     },
   ];
 }
+storeCart();
 export function addtocart(productID) {
   let matchingItem = true;
   cart.forEach((item) => {

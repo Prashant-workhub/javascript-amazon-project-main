@@ -28,7 +28,7 @@ products.forEach((element) => {
               </div>
 
               <div class="product-price">$${formatCurrency(
-                element.priceCents
+                element.priceCents,
               )}</div>
 
                 <div class="product-quantity-container">
@@ -78,3 +78,6 @@ document.querySelectorAll(".add-to-cart-button").forEach((button) => {
     cartQuant();
   });
 });
+
+// initialize cart quantity on page load
+cartQuant();
